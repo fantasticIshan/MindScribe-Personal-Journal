@@ -12,7 +12,7 @@ const signToken = (id) =>
 const cookieOptions = () => ({
   httpOnly: true, // not readable by client-side JS - mitigates XSS token theft
   secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-  sameSite: 'lax', // reasonable CSRF protection for a same-site SPA
+  sameSite: process.env.COOKIE_SAME_SITE || 'lax',
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days, keep in sync with JWT_EXPIRES_IN
 });
 
@@ -79,3 +79,4 @@ const getMe = asyncHandler(async (req, res) => {
 });
 
 module.exports = { register, login, logout, getMe };
+
