@@ -5,7 +5,7 @@ import axios from 'axios';
 // development, and on serving the frontend from the same origin as the API
 // (or a reverse proxy) in production.
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
